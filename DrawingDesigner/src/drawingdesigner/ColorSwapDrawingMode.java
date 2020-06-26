@@ -15,7 +15,7 @@ import javax.swing.JTextField;
 public class ColorSwapDrawingMode implements IDrawingMode
 {
     private JTextField[][] myGrid;
-    private Color oldColor;
+    private Color previousColor;
     private Color newColor;
     private JTextField target;
     
@@ -33,17 +33,16 @@ public class ColorSwapDrawingMode implements IDrawingMode
     public void StartDrawing(Object source)
     {
          target = (JTextField)source;
-         oldColor =target.getBackground();
+         previousColor = target.getBackground();
+         System.out.println(previousColor.toString());
          
          for (int i = 0; i < gridX; i++)
         {
             for (int j = 0; j < gridY; j++)
             {
-                System.out.println(i + " , " + j);
-                if (myGrid[i][j].getBackground() == oldColor)
+                if (myGrid[i][j].getBackground().getRGB() == previousColor.getRGB())
                 {
-                    myGrid[i][j].setBackground(newColor);
-                    
+                    myGrid[i][j].setBackground(newColor);   
                 }
             }
         }
@@ -54,10 +53,7 @@ public class ColorSwapDrawingMode implements IDrawingMode
    
 
     @Override
-    public void EndDrawing(Object source)
-    {
-        
-    }
+    public void EndDrawing(Object source){}
 
     @Override
     public void SetColor(Object source)

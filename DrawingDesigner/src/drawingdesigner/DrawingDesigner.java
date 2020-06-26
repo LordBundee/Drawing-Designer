@@ -21,6 +21,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.RandomAccessFile;
 import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.LineBorder;
 
 /**
  *
@@ -109,6 +111,16 @@ public class DrawingDesigner extends JFrame implements KeyListener, ActionListen
     {
         currentColor = Color.BLUE;
         drawMode = new PenDrawingMode();
+        
+        btnRed.setBorderPainted(false);
+        btnBlue.setBorderPainted(true);
+        btnYellow.setBorderPainted(false);
+        btnGreen.setBorderPainted(false);
+        btnEraser.setBorderPainted(false);
+        
+        btnPenMode.setBorderPainted(true);
+        btnBoxMode.setBorderPainted(false);
+        btnSwapMode.setBorderPainted(false);
     }
      
     private void createDrawingGrid(SpringLayout layout)
@@ -165,11 +177,17 @@ public class DrawingDesigner extends JFrame implements KeyListener, ActionListen
         btnBoxMode = LibraryComponents.LocateAJButton(this, this, layout, "Box Mode", 20, 50, 110, 25); 
         btnSwapMode = LibraryComponents.LocateAJButton(this, this, layout, "Color Swap", 20, 80, 110, 25); 
         
+        Border selectedButton = new LineBorder(Color.BLACK, 5);
         btnRed = LibraryComponents.LocateAJButton(this, this, layout, "", 20, 110, 150, 50);
+        btnRed.setBorder(selectedButton);
         btnBlue = LibraryComponents.LocateAJButton(this, this, layout, "", 20, 170, 150, 50);
+        btnBlue.setBorder(selectedButton);
         btnYellow = LibraryComponents.LocateAJButton(this, this, layout, "", 20, 230, 150, 50);
+        btnYellow.setBorder(selectedButton);
         btnGreen = LibraryComponents.LocateAJButton(this, this, layout, "", 20, 290, 150, 50); 
-        btnEraser = LibraryComponents.LocateAJButton(this, this, layout, "", 20, 350, 50, 50); 
+        btnGreen.setBorder(selectedButton);
+        btnEraser = LibraryComponents.LocateAJButton(this, this, layout, "", 20, 350, 50, 50);
+        btnEraser.setBorder(selectedButton);
        
     } 
     
@@ -209,41 +227,75 @@ public class DrawingDesigner extends JFrame implements KeyListener, ActionListen
         if (ae.getSource() == btnPenMode)
         {
             drawMode = new PenDrawingMode();
+            btnPenMode.setBorderPainted(true);
+            btnBoxMode.setBorderPainted(false);
+            btnSwapMode.setBorderPainted(false);
         }
         
         if (ae.getSource() == btnBoxMode)
         {
             drawMode = new SquareDrawingMode(grid, sizeX, sizeY);
+            btnPenMode.setBorderPainted(false);
+            btnBoxMode.setBorderPainted(true);
+            btnSwapMode.setBorderPainted(false);
         }
         
         if (ae.getSource() == btnSwapMode)
         {
             drawMode = new ColorSwapDrawingMode(grid, sizeX, sizeY);
+            btnPenMode.setBorderPainted(false);
+            btnBoxMode.setBorderPainted(false);
+            btnSwapMode.setBorderPainted(true);
         }
         
         if (ae.getSource() == btnRed)
         {
             currentColor = Color.RED;
+            btnRed.setBorderPainted(true);
+            btnBlue.setBorderPainted(false);
+            btnYellow.setBorderPainted(false);
+            btnGreen.setBorderPainted(false);
+            btnEraser.setBorderPainted(false);
         }
         
         if (ae.getSource() == btnBlue)
         {
             currentColor = Color.BLUE;
+            btnRed.setBorderPainted(false);
+            btnBlue.setBorderPainted(true);
+            btnYellow.setBorderPainted(false);
+            btnGreen.setBorderPainted(false);
+            btnEraser.setBorderPainted(false);
         }
         
         if (ae.getSource() == btnYellow)
         {
             currentColor = Color.YELLOW;
+            btnRed.setBorderPainted(false);
+            btnBlue.setBorderPainted(false);
+            btnYellow.setBorderPainted(true);
+            btnGreen.setBorderPainted(false);
+            btnEraser.setBorderPainted(false);
         }
         
         if (ae.getSource() == btnGreen)
         {
             currentColor = Color.GREEN;
+            btnRed.setBorderPainted(false);
+            btnBlue.setBorderPainted(false);
+            btnYellow.setBorderPainted(false);
+            btnGreen.setBorderPainted(true);
+            btnEraser.setBorderPainted(false);
         }
         
         if (ae.getSource() == btnEraser)
         {
             currentColor = Color.WHITE;
+            btnRed.setBorderPainted(false);
+            btnBlue.setBorderPainted(false);
+            btnYellow.setBorderPainted(false);
+            btnGreen.setBorderPainted(false);
+            btnEraser.setBorderPainted(true);
         }
         
         if (ae.getSource() == btnRotate)
